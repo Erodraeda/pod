@@ -2,48 +2,40 @@
 #include <stdio.h>
 #include <string.h>
 
-int foundNumbers[2500000] = {};
-int top = 0;
-
-void push()
-{
-    if(top>=n-1)
-    {
-        printf("\n\tSTACK is over flow");
-        
-    }
-    else
-    {
-        printf(" Enter a value to be pushed:");
-        scanf("%d",&x);
-        top++;
-        foundNumbers[top]=x;
-    }
-}
-
 int counter(int maxNumber, int selectedMultiple) {
 
     int i = 0;
 
+    int total = 0;
+
     for (i = 0; i < maxNumber; i++) {
         if (i % selectedMultiple == 0) {
-            printf("%d", i);
-            push();
+            printf(" %d\n", i);
+            total++;
         }
     }
+
+    return total;
 
 }
 
 void main() {
 
-    counter(10000000, 3);
-    
-    int i = 0;
+    int threeMult = counter(10000000, 3);
 
-    for (i = 0; i < 2500000; i++) {
-        printf("%d", foundNumbers[i]);
-    }
+    int fiveMult = counter(10000000, 5);
 
-    top = 0;
+    int sevenMult = counter(10000000, 7);
+
+    int nineMult = counter(10000000, 9);
+
+    printf(" Multiplos de 3: %d\n", threeMult);
+
+    printf(" Multiplos de 5: %d\n", fiveMult);
+
+    printf(" Multiplos de 7: %d\n", sevenMult);
+
+    printf(" Multiplos de 9: %d\n", nineMult);
+
 
 }
