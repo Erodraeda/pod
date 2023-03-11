@@ -2,30 +2,28 @@
 #include <stdio.h>
 #include <string.h>
 
+FILE *file;
+
 char threeFileName[30] = "files/threeFile.txt";
 char fiveFileName[30] = "files/fiveFile.txt";
 char sevenFileName[30] = "files/sevenFile.txt";
 char nineFileName[30] = "files/nineFile.txt";
-
 char fileName[30];
 
-int counter(int maxNumber, int selectedMultiple, FILE *file);
+int maxvalue = 10000000;
+
+int counter(int maxNumber, int selectedMultiple);
 void getCurrentFile(int selectedMultiple);
 
 void main() {
 
-    FILE *threeFile;
-    FILE *fiveFile;
-    FILE *sevenFile;
-    FILE *nineFile;
+    int threeMult = counter(maxvalue, 3);
 
-    int threeMult = counter(10000000, 3, threeFile);
+    int fiveMult = counter(maxvalue, 5);
 
-    int fiveMult = counter(10000000, 5, fiveFile);
+    int sevenMult = counter(maxvalue, 7);
 
-    int sevenMult = counter(10000000, 7, sevenFile);
-
-    int nineMult = counter(10000000, 9, nineFile);
+    int nineMult = counter(maxvalue, 9);
 
     printf(" Multiplos de 3: %d\n", threeMult);
 
@@ -39,7 +37,7 @@ void main() {
 
 }
 
-int counter(int maxNumber, int selectedMultiple, FILE *file) {
+int counter(int maxNumber, int selectedMultiple) {
 
     int i = 0;
 
@@ -51,7 +49,7 @@ int counter(int maxNumber, int selectedMultiple, FILE *file) {
     }
     else {
         printf("arquivo aberto: %s\n", fileName);
-    for (i = 0; i < maxNumber; i++) {
+    for (i = 1; i <= maxNumber; i++) {
         if (i % selectedMultiple == 0) {
             total++;
             fprintf(file, "%d\n", i);
