@@ -41,7 +41,7 @@ void main() {
     pthread_create(&thread3, NULL, counter, (void *)&sevenArguments);
     pthread_join(thread3, NULL);
     pthread_create(&thread4, NULL, counter, (void *)&nineArguments);
-    pthread_join(thread3, NULL);
+    pthread_join(thread4, NULL);
 
     return 0;
 
