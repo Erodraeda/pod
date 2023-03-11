@@ -41,21 +41,19 @@ void main() {
     pthread_create(&thread3, NULL, counter, (void *)&sevenArguments);
     pthread_join(thread3, NULL);
     pthread_create(&thread4, NULL, counter, (void *)&nineArguments);
-    pthread_join(thread4, NULL);
+    pthread_join(thread3, NULL);
 
-    system("pause");
+    return 0;
 
 }
 
 void *counter(void *arguments) {
 
-    int i = 0;
-
     struct args_struct *args = arguments;
 
     getCurrentFile(args -> selectedMultiple);
 
-    printf("  %d\n", args -> selectedMultiple);
+    printf(" %d\n", args -> selectedMultiple);
 
     int total = 0;
     if((file = fopen(args -> fileName, "w+")) == NULL) {
@@ -63,7 +61,7 @@ void *counter(void *arguments) {
     }
     else {
         printf("arquivo aberto: %s\n", args -> fileName);
-    for (i = 1; i <= args -> maxvalue; i++) {
+    for (int i = 1; i <= args -> maxvalue; i++) {
         if (i % args -> selectedMultiple == 0) {
             total++;
             fprintf(file, "%d\n", i);
@@ -74,7 +72,7 @@ void *counter(void *arguments) {
 
     printf(" Multiplos de %d: %d\n", args -> selectedMultiple, total);
 
-    pthread_exit(NULL);
+    return 0;
 
 }
 
