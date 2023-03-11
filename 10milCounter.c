@@ -2,32 +2,30 @@
 #include <stdio.h>
 #include <string.h>
 
-int counter(int maxNumber, int selectedMultiple) {
+char threeFileName[14] = "threeFile.txt";
+char fiveFileName[14] = "fiveFile.txt";
+char sevenFileName[14] = "sevenFile.txt";
+char nineFileName[14] = "nineFile.txt";
 
-    int i = 0;
+char fileName[14];
 
-    int total = 0;
-
-    for (i = 0; i < maxNumber; i++) {
-        if (i % selectedMultiple == 0) {
-            printf(" %d\n", i);
-            total++;
-        }
-    }
-
-    return total;
-
-}
+int counter(int maxNumber, int selectedMultiple, FILE *file);
+void getCurrentFile(int selectedMultiple);
 
 void main() {
 
-    int threeMult = counter(10000000, 3);
+    FILE *threeFile;
+    FILE *fiveFile;
+    FILE *sevenFile;
+    FILE *nineFile;
 
-    int fiveMult = counter(10000000, 5);
+    int threeMult = counter(10000000, 3, threeFile);
 
-    int sevenMult = counter(10000000, 7);
+    int fiveMult = counter(10000000, 5, fiveFile);
 
-    int nineMult = counter(10000000, 9);
+    int sevenMult = counter(10000000, 7, sevenFile);
+
+    int nineMult = counter(10000000, 9, nineFile);
 
     printf(" Multiplos de 3: %d\n", threeMult);
 
@@ -37,5 +35,51 @@ void main() {
 
     printf(" Multiplos de 9: %d\n", nineMult);
 
+    system("pause");
+
+}
+
+int counter(int maxNumber, int selectedMultiple, FILE *file) {
+
+    int i = 0;
+
+    getCurrentFile(selectedMultiple);
+
+    int total = 0;
+    if((file = fopen(fileName, "w+")) == NULL) {
+        printf("Erro ao abrir arquivo");
+    }
+    else {
+        printf("arquivo aberto: %s\n", fileName);
+    for (i = 0; i < maxNumber; i++) {
+        if (i % selectedMultiple == 0) {
+            total++;
+            fprintf(file, "%d\n", i);
+        }
+    }
+    fclose(file);
+    }
+
+    return total;
+
+}
+
+void getCurrentFile(int selectedMultiple) {
+
+    switch(selectedMultiple) {
+
+        case 3:
+            strcpy(fileName, threeFileName);
+            break;
+        case 5:
+            strcpy(fileName, fiveFileName);
+            break;
+        case 7:
+            strcpy(fileName, sevenFileName);
+            break;
+        case 9:
+            strcpy(fileName, nineFileName);
+            break;
+    }
 
 }
