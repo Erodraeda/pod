@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
-char threeFileName[14] = "threeFile.txt";
-char fiveFileName[14] = "fiveFile.txt";
-char sevenFileName[14] = "sevenFile.txt";
-char nineFileName[14] = "nineFile.txt";
+char threeFileName[30] = "files/threeFile.txt";
+char fiveFileName[30] = "files/fiveFile.txt";
+char sevenFileName[30] = "files/sevenFile.txt";
+char nineFileName[30] = "files/nineFile.txt";
 
-char fileName[14];
+char fileName[30];
 
 int counter(int maxNumber, int selectedMultiple, FILE *file);
 void getCurrentFile(int selectedMultiple);
