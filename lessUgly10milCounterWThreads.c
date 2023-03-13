@@ -21,6 +21,7 @@ struct args_struct {
     int maxvalue;
     int selectedMultiple;
     char fileName[30];
+    FILE *file;
 };
 
 void *counter(void *arguments);
@@ -30,10 +31,10 @@ void main() {
 
     struct args_struct arguments;
 
-    struct args_struct threeArguments = {maxvalue, 3, "files/threadedThreeFile.txt"};
-    struct args_struct fiveArguments = {maxvalue, 5, "files/threadedFiveFile.txt"};
-    struct args_struct sevenArguments = {maxvalue, 7, "files/threadedSevenFile.txt"};
-    struct args_struct nineArguments = {maxvalue, 9, "files/threadedNineFile.txt"};
+    struct args_struct threeArguments = {maxvalue, 3, "files/threadedThreeFile.txt", file3};
+    struct args_struct fiveArguments = {maxvalue, 5, "files/threadedFiveFile.txt", file5};
+    struct args_struct sevenArguments = {maxvalue, 7, "files/threadedSevenFile.txt", file7};
+    struct args_struct nineArguments = {maxvalue, 9, "files/threadedNineFile.txt", file9};
 
     pthread_t thread1, thread2, thread3, thread4;
 
@@ -60,71 +61,17 @@ void *counter(void *arguments) {
 
     int total = 0;
 
-    switch (args -> selectedMultiple) {
-        case 3:
-            
-            if((file3 = fopen(args -> fileName, "w+")) == NULL) {
-                printf("Erro ao abrir arquivo");
+    if((args -> file = fopen(args -> fileName, "w+")) == NULL) {
+        printf("Erro ao abrir arquivo");
+    } else {
+        printf("arquivo aberto: %s\n", args -> fileName);
+        for (int i = 1; i <= args -> maxvalue; i++) {
+            if (i % args -> selectedMultiple == 0) {
+                total++;
+                fprintf(args -> file, "%d\n", i);
             }
-            else {
-                printf("arquivo aberto: %s\n", args -> fileName);
-            for (int i = 1; i <= args -> maxvalue; i++) {
-                if (i % args -> selectedMultiple == 0) {
-                    total++;
-                    fprintf(file3, "%d\n", i);
-                }
-            }
-                fclose(file3);
-            }
-            break;
-        case 5:
-            
-            if((file5 = fopen(args -> fileName, "w+")) == NULL) {
-                printf("Erro ao abrir arquivo");
-            }
-            else {
-                printf("arquivo aberto: %s\n", args -> fileName);
-            for (int i = 1; i <= args -> maxvalue; i++) {
-                if (i % args -> selectedMultiple == 0) {
-                    total++;
-                    fprintf(file5, "%d\n", i);
-                }
-            }
-                fclose(file5);
-            }
-            break;
-        case 7:
-            
-            if((file7 = fopen(args -> fileName, "w+")) == NULL) {
-                printf("Erro ao abrir arquivo");
-            }
-            else {
-                printf("arquivo aberto: %s\n", args -> fileName);
-            for (int i = 1; i <= args -> maxvalue; i++) {
-                if (i % args -> selectedMultiple == 0) {
-                    total++;
-                    fprintf(file7, "%d\n", i);
-                }
-            }
-                fclose(file7);
-            }
-            break;
-        case 9:
-            
-            if((file9 = fopen(args -> fileName, "w+")) == NULL) {
-                printf("Erro ao abrir arquivo");
-            }
-            else {
-                printf("arquivo aberto: %s\n", args -> fileName);
-            for (int i = 1; i <= args -> maxvalue; i++) {
-                if (i % args -> selectedMultiple == 0) {
-                    total++;
-                    fprintf(file9, "%d\n", i);
-                }
-            }
-                fclose(file9);
-            }
-            break;
+        }
+        fclose(args -> file);
     }
 
     printf(" Multiplos de %d: %d\n", args -> selectedMultiple, total);
