@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
-FILE *file;
+FILE *file3;
+FILE *file5;
+FILE *file7;
+FILE *file9;
 
 char threeFileName[30] = "files/threeFile.txt";
 char fiveFileName[30] = "files/fiveFile.txt";
@@ -12,18 +15,32 @@ char fileName[30];
 
 int maxvalue = 10000000;
 
-int counter(int maxNumber, int selectedMultiple);
+struct args_struct {
+    int maxvalue;
+    int selectedMultiple;
+    char fileName[30];
+    FILE *file;
+};
+
+int *counter(void *arguments);
 void getCurrentFile(int selectedMultiple);
 
 void main() {
 
-    int threeMult = counter(maxvalue, 3);
+    struct args_struct arguments;
 
-    int fiveMult = counter(maxvalue, 5);
+    struct args_struct threeArguments = {maxvalue, 3, "files/threeFile.txt", file3};
+    struct args_struct fiveArguments = {maxvalue, 5, "files/fiveFile.txt", file5};
+    struct args_struct sevenArguments = {maxvalue, 7, "files/sevenFile.txt", file7};
+    struct args_struct nineArguments = {maxvalue, 9, "files/nineFile.txt", file9};
 
-    int sevenMult = counter(maxvalue, 7);
+    int threeMult = counter(&threeArguments);
 
-    int nineMult = counter(maxvalue, 9);
+    int fiveMult = counter(&fiveArguments);
+
+    int sevenMult = counter(&sevenArguments);
+
+    int nineMult = counter(&nineArguments);
 
     printf(" Multiplos de 3: %d\n", threeMult);
 
@@ -37,47 +54,26 @@ void main() {
 
 }
 
-int counter(int maxNumber, int selectedMultiple) {
+int *counter(void *arguments) {
 
-    int i = 0;
+    struct args_struct *args = arguments;
 
-    getCurrentFile(selectedMultiple);
+    printf(" %d\n", args -> selectedMultiple);
 
     int total = 0;
-    if((file = fopen(fileName, "w+")) == NULL) {
+    if((args -> file = fopen(args -> fileName, "w+")) == NULL) {
         printf("Erro ao abrir arquivo");
-    }
-    else {
-        printf("arquivo aberto: %s\n", fileName);
-    for (i = 1; i <= maxNumber; i++) {
-        if (i % selectedMultiple == 0) {
-            total++;
-            fprintf(file, "%d\n", i);
+    } else {
+        printf("arquivo aberto: %s\n", args -> fileName);
+        for (int i = 1; i <= args -> maxvalue; i++) {
+            if (i % args -> selectedMultiple == 0) {
+                total++;
+                fprintf(args -> file, "%d\n", i);
+            }
         }
-    }
-    fclose(file);
+        fclose(args -> file);
     }
 
     return total;
-
-}
-
-void getCurrentFile(int selectedMultiple) {
-
-    switch(selectedMultiple) {
-
-        case 3:
-            strcpy(fileName, threeFileName);
-            break;
-        case 5:
-            strcpy(fileName, fiveFileName);
-            break;
-        case 7:
-            strcpy(fileName, sevenFileName);
-            break;
-        case 9:
-            strcpy(fileName, nineFileName);
-            break;
-    }
 
 }
