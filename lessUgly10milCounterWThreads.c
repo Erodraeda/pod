@@ -13,8 +13,6 @@ char fiveFileName[30] = "files/threadedFiveFile.txt";
 char sevenFileName[30] = "files/threadedSevenFile.txt";
 char nineFileName[30] = "files/threadedNineFile.txt";
 
-char fileName[30];
-
 int maxvalue = 10000000;
 
 struct args_struct {
@@ -25,7 +23,6 @@ struct args_struct {
 };
 
 void *counter(void *arguments);
-void getCurrentFile(int selectedMultiple);
 
 void main() {
 
@@ -55,8 +52,6 @@ void *counter(void *arguments) {
 
     struct args_struct *args = arguments;
 
-    getCurrentFile(args -> selectedMultiple);
-
     printf(" %d\n", args -> selectedMultiple);
 
     int total = 0;
@@ -77,25 +72,5 @@ void *counter(void *arguments) {
     printf(" Multiplos de %d: %d\n", args -> selectedMultiple, total);
 
     return 0;
-
-}
-
-void getCurrentFile(int selectedMultiple) {
-
-    switch(selectedMultiple) {
-
-        case 3:
-            strcpy(fileName, threeFileName);
-            break;
-        case 5:
-            strcpy(fileName, fiveFileName);
-            break;
-        case 7:
-            strcpy(fileName, sevenFileName);
-            break;
-        case 9:
-            strcpy(fileName, nineFileName);
-            break;
-    }
 
 }
