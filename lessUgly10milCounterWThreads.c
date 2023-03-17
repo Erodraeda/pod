@@ -4,7 +4,7 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
+// #include <unistd.h>
 
 // Create file pointers
 FILE *file3;
@@ -17,7 +17,6 @@ int maxvalue = 10000000;
 
 // Thread arguments struct
 struct args_struct {
-    int maxvalue;
     int selectedMultiple;
     char fileName[30];
     FILE *file;
@@ -40,10 +39,10 @@ void main() {
     // Starts structs for arguments for each function
     struct args_struct arguments;
 
-    struct args_struct threeArguments = {maxvalue, 3, "files/threadedThreeFile.txt", file3};
-    struct args_struct fiveArguments = {maxvalue, 5, "files/threadedFiveFile.txt", file5};
-    struct args_struct sevenArguments = {maxvalue, 7, "files/threadedSevenFile.txt", file7};
-    struct args_struct nineArguments = {maxvalue, 9, "files/threadedNineFile.txt", file9};
+    struct args_struct threeArguments = {3, "files/threadedThreeFile.txt", file3};
+    struct args_struct fiveArguments = {5, "files/threadedFiveFile.txt", file5};
+    struct args_struct sevenArguments = {7, "files/threadedSevenFile.txt", file7};
+    struct args_struct nineArguments = {9, "files/threadedNineFile.txt", file9};
 
     // Thread declaration
     pthread_t thread1, thread2, thread3, thread4;
@@ -80,7 +79,7 @@ void *counter(void *arguments) {
     } else {
         // Iterates up to the maxvalue declared
         printf("arquivo aberto: %s\n", args -> fileName);
-        for (int i = 1; i <= args -> maxvalue; i++) {
+        for (int i = 1; i <= maxvalue; i++) {
             if (i % args -> selectedMultiple == 0) {
                 total++;
                 // Saves data to the file
