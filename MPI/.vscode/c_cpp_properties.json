@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/mnt/e/backup m.2 04-23/Faculdade/POD/pod/MPI/**",
+                "/mnt/c/mpihc/include",
+                "C:/mpihc/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerPathInCppPropertiesJson": "/usr/bin/gcc",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**",
+                    "c:\\mpihc\\include",
+                    "\\",
+                    "c:\\"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "e:\\backup m.2 04-23\\Faculdade\\POD\\pod\\MPI/**",
+                "${MSMPI_INC}"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "E:/mingw32/bin/gcc.exe",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerPathInCppPropertiesJson": "E:/mingw32/bin/gcc.exe",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
