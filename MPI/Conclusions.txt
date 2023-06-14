@@ -1,3 +1,5 @@
 Conclusions
 
 Procedural is faster than 1 process MPI, but from 2 processes onwards MPI is considerably faster
+
+9 processes, for this specific test, had the fastest speed, but by a very small margin. Possibly in a larger routine more processes would be needed.
